@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {Table} from 'react-bootstrap';
 
-type Player = {
+export type Player = {
   name: string;
 }
 
@@ -11,15 +11,20 @@ type VoteProps = {
 
 function VoteTable(props: VoteProps) {
   const { players } = props;
+  const [voted, setVoted] = useState<string>('');
 
   console.log(players);
 
   const playerElems = players.map(player => (
     <tr key={player.name}>
-      <td><input name="vote" type="radio" id={`vote-${player.name}`} /></td>
       <td>
-      <label htmlFor={`vote-${player.name}`}>
-      {player.name}
+        <input value={player.name} name="vote" type="radio"
+        onChange={e => e.target.checked && setVoted(e.target.value)} id={`vote-${player.name}`} />
+      </td>
+      <td>
+      <label
+        htmlFor={`vote-${player.name}`}>
+        {player.name}
       </label>
       </td>
       </tr>
@@ -39,6 +44,8 @@ function VoteTable(props: VoteProps) {
       {playerElems}
     </tbody>
     </>
+    Voted: {voted}
+    <button >Clicky</button>
     </Table>
   );
 }
