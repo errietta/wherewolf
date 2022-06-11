@@ -1,9 +1,9 @@
-
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import { Player, Voting } from './components/pages/Voting';
 import { useState } from 'react';
+import { GameSelection } from './components/pages/GameSelection';
 
 function splitPlayerList(playerText: string) {
   return playerText.split("\n").map(
@@ -12,9 +12,16 @@ function splitPlayerList(playerText: string) {
 }
 
 function App() {
-  let moderationMode = true;
   const [playerList, setPlayerList] = useState<Player[]>([]);
-  const [textAreaValue, setTextAreaValue] = useState<string>('');
+  const [textAreaValue, setTextAreaValue] = useState<string>();
+  const [game, setGame] = useState<string>();
+  const [moderationMode, setModerationMode] = useState<boolean>(false);
+
+  if (!game) {
+    return <div className="App">
+      <GameSelection onJoinGame={gameId => setGame(gameId)}></GameSelection>
+    </div>
+  }
 
   if (moderationMode && !playerList.length) {
     return (
@@ -24,15 +31,15 @@ function App() {
       }/>
       <br/>
       <button onClick={
-        (e) => setPlayerList(
-          splitPlayerList(textAreaValue)
-        )}>Clickly</button>
+        (e) => textAreaValue && setPlayerList(splitPlayerList(textAreaValue))
+      }>Clickly</button>
     </div>
   );
 
   }
   else {
     console.log(playerList);
+
     return (
       <div className="App">
         <Voting players={
