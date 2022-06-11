@@ -1,9 +1,12 @@
 import { useState } from "react";
 import { Button, Form } from "react-bootstrap";
 
-export function GameSelection(props: { onJoinGame: (gameId: string) => void }) {
+export function GameSelection(props: {
+  onJoinGame: (gameId: string) => void;
+  onCreateGame: () => void;
+}) {
   const [gameId, setGameId] = useState<string>();
-  const { onJoinGame } = props;
+  const { onJoinGame, onCreateGame } = props;
 
   return (
     <Form
@@ -38,6 +41,11 @@ export function GameSelection(props: { onJoinGame: (gameId: string) => void }) {
         type="button"
         id="createGame"
         name="createGame"
+        onClick={() => {
+          setGameId("abc");
+          onJoinGame("abc");
+          onCreateGame();
+        }}
       >
         Create a new game
       </Button>
