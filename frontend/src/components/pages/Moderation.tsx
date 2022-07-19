@@ -27,6 +27,7 @@ function Moderation() {
 	}
 
 	return <Link to="/game/">Go to game</Link>
+
 }
 
 export default Moderation;

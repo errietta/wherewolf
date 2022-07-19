@@ -2,15 +2,15 @@
 import "../../App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-import { Player, Voting } from "./Voting";
 import { useState } from "react";
 
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { GameSelection } from "./GameSelection";
 
 function Home() {
   const [game, setGame] = useState<string>();
   const [moderationMode, setModerationMode] = useState<boolean>(false);
+  const navigate = useNavigate();
 
   if (!game) {
     return (
@@ -27,9 +27,9 @@ function Home() {
   }
 
   if (moderationMode) {
-    return <Link to="/game/moderate">Mod game</Link>
+    return <>{navigate("/game/moderate")}</>
   } else {
-    return <Link to={`/game/${game}`}>Join game</Link>
+    return <>{navigate(`/game/${game}`)}</>
   }
 }
 
