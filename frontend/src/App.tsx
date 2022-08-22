@@ -1,11 +1,7 @@
-import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "./App.css";
 
-import {
-  Routes,
-  Route,
-  BrowserRouter
-} from 'react-router-dom';
+import { Routes, Route, BrowserRouter } from "react-router-dom";
 import Home from "./components/pages/Home";
 import Game from "./components/pages/Game";
 import Moderation from "./components/pages/Moderation";
