@@ -41,7 +41,16 @@
   width: 100%;
 }
 
+.fullHeight {
+  height: 100%;
+}
+
 /* voting */
+
+.voteLabel {
+  border: 1px solid red;
+  padding: 3px;
+}
 
 .voteDiv {
   height: 80%;

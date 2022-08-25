@@ -5,12 +5,16 @@ export type Player = {
   name: string;
 };
 
+type VoteTableProps = VoteProps & {
+  onSubmit: (playerName: string) => void;
+};
+
 type VoteProps = {
   players: Player[];
   gameId: string;
 };
 
-function VoteTable(props: VoteProps) {
+function VoteTable(props: VoteTableProps) {
   //const { players } = props;
   const players: Player[] = [
     { name: "Rosie Groves" },
@@ -38,6 +42,14 @@ function VoteTable(props: VoteProps) {
 
   console.log(players);
 
+  const onSubmit = () => {
+    if (!voted) {
+      return;
+    }
+
+    props.onSubmit(voted);
+  };
+
   const playerElems = players.map((player) => (
     <tr key={player.name}>
       <td>
@@ -50,7 +62,10 @@ function VoteTable(props: VoteProps) {
         />
       </td>
       <td>
-        <label className="fullWidth" htmlFor={`vote-${player.name}`}>
+        <label
+          className="fullWidth fullHeight voteLabel"
+          htmlFor={`vote-${player.name}`}
+        >
           {player.name}
         </label>
       </td>
@@ -59,6 +74,8 @@ function VoteTable(props: VoteProps) {
 
   return (
     <div className="fullScreenHeight">
+      <p>Select a player to vote. Scroll the table to see all options</p>
+
       <div className="voteDiv">
         <Table className="voteTable">
           <thead>
@@ -72,7 +89,14 @@ function VoteTable(props: VoteProps) {
       </div>
       <div>
         <p>Voting for: {voted}</p>
-        <Button variant="primary" type="button" id="voteBtn" name="voteBtn">
+        <Button
+          variant="primary"
+          type="button"
+          id="voteBtn"
+          name="voteBtn"
+          disabled={!voted}
+          onClick={() => onSubmit()}
+        >
           Submit vote
         </Button>
       </div>
@@ -80,6 +104,22 @@ function VoteTable(props: VoteProps) {
   );
 }
 
+function VoteResult({ playerName }: { playerName: string }) {
+  return (
+    <div>
+      <>Voted {{ playerName }}</>
+    </div>
+  );
+}
+
 export function Voting(props: VoteProps) {
-  return <VoteTable {...props} />;
+  const [votedPlayerName, setVotedPlayerName] = useState<string>("");
+
+  if (!votedPlayerName) {
+    return (
+      <VoteTable {...props} onSubmit={(player) => setVotedPlayerName(player)} />
+    );
+  } else {
+    return <VoteResult playerName={votedPlayerName}></VoteResult>;
+  }
 }
