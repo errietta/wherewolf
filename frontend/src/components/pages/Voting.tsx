@@ -50,15 +50,16 @@ function VoteTable(props: VoteProps) {
         />
       </td>
       <td>
-        <label htmlFor={`vote-${player.name}`}>{player.name}</label>
+        <label className="fullWidth" htmlFor={`vote-${player.name}`}>
+          {player.name}
+        </label>
       </td>
     </tr>
   ));
-  console.log(playerElems);
 
   return (
-    <div style={{ height: "100vh" }}>
-      <div style={{ height: "80%" }}>
+    <div className="fullScreenHeight">
+      <div className="voteDiv">
         <Table className="voteTable">
           <thead>
             <tr>

@@ -32,6 +32,22 @@
     transform: rotate(360deg);
   }
 }
+
+.fullScreenHeight {
+  height: 100vh;
+}
+
+.fullWidth {
+  width: 100%;
+}
+
+/* voting */
+
+.voteDiv {
+  height: 80%;
+  overflow: auto;
+}
+
 @media only screen and (min-width: 600px) {
   .voteTable {
     width: 40%
@@ -41,3 +57,6 @@
 .voteHeader {
   width: 10%;
 }
+
+
+/* */
