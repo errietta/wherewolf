@@ -71,7 +71,7 @@ function VoteTable(props: VoteTableProps) {
         </Table>
       </div>
       <div>
-        <p>Voting for: {playerLookup[voted].name}</p>
+        <p>{ voted ? `Voting for: ${playerLookup[voted].name}` : '' }</p>
         <Button
           variant="primary"
           type="button"
@@ -89,10 +89,21 @@ function VoteTable(props: VoteTableProps) {
 
 function VoteResult({ player }: { player: Player }) {
   return (
-    <div>
-      <>Voted { player.name }</>
-    </div>
-  );
+      <div className="bg-light p-5 rounded-lg m-3">
+        <h1 className="display-4">Vote successful!</h1>
+
+        <p className="lead">You have voted for { player.name }</p>
+        <hr className="my-4" />
+        <p>Your vote has been recorded. You can now go back to your game.</p>
+        <Button
+          type="button"
+          variant="primary"
+          onClick={ () => window.location.reload() }
+        >
+          Go back to the game
+        </Button>
+      </div>
+    );
 }
 
 export function Voting(props: VoteProps) {
