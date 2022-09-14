@@ -51,15 +51,17 @@ function VoteTable(props: VoteTableProps) {
   };
 
   const playerElems = players.map((player) => (
-    <tr key={player.name}>
+    <tr key={player.name} className={ voted && voted === player.name ? 'votedActive' : '' } >
       <td>
-        <input
-          value={player.name}
-          name="vote"
-          type="radio"
-          onChange={(e) => e.target.checked && setVoted(e.target.value)}
-          id={`vote-${player.name}`}
-        />
+        <div className="voteInput">
+          <input
+            value={player.name}
+            name="vote"
+            type="radio"
+            onChange={(e) => e.target.checked && setVoted(e.target.value)}
+            id={`vote-${player.name}`}
+          />
+        </div>
       </td>
       <td>
         <label

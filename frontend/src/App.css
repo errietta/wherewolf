@@ -48,8 +48,17 @@
 /* voting */
 
 .voteLabel {
-  border: 1px solid red;
-  padding: 3px;
+  padding: 8px;
+  cursor: pointer;
+  display: block;
+}
+
+.voteInput {
+  padding: 8px 5px 8px 8px;
+}
+
+.voteInput input[type="radio"] {
+/*  visibility: hidden; */
 }
 
 .voteDiv {
@@ -61,6 +70,14 @@
   .voteTable {
     width: 40%
   }
+}
+
+.voteTable tr.votedActive {
+  background-color: beige
+}
+
+.voteTable td {
+  padding: 0 8px 0 8px
 }
 
 .voteHeader {
