@@ -2,11 +2,13 @@ import React, { useState } from "react";
 import { Button, Table } from "react-bootstrap";
 
 export type Player = {
+  id: string;
   name: string;
 };
 
 type VoteTableProps = VoteProps & {
-  onSubmit: (playerName: string) => void;
+  playerLookup: Record<string, Player>;
+  onSubmit: (playerId: string) => void;
 };
 
 type VoteProps = {
@@ -15,29 +17,8 @@ type VoteProps = {
 };
 
 function VoteTable(props: VoteTableProps) {
-  //const { players } = props;
-  const players: Player[] = [
-    { name: "Rosie Groves" },
-    { name: "Rey Meeland" },
-    { name: "Jacky Blamey" },
-    { name: "Cristiano Allon" },
-    { name: "Lowrance Putten" },
-    { name: "Maryellen Havvock" },
-    { name: "Kanya Baulcombe" },
-    { name: "Leola Habens" },
-    { name: "Illa Swaden" },
-    { name: "Orsola Garatty" },
-    { name: "Bentley Cuningham" },
-    { name: "Toddie Weerdenburg" },
-    { name: "Nickola Dewicke" },
-    { name: "Kevin Mountstephen" },
-    { name: "Alicea Raulin" },
-    { name: "Shea Truitt" },
-    { name: "Aldis Paradin" },
-    { name: "Janis Tzarkov" },
-    { name: "Pall Dalgety" },
-    { name: "Manny Nathan" },
-  ];
+  const { players, playerLookup } = props;
+
   const [voted, setVoted] = useState<string>("");
 
   console.log(players);
@@ -51,22 +32,22 @@ function VoteTable(props: VoteTableProps) {
   };
 
   const playerElems = players.map((player) => (
-    <tr key={player.name} className={ voted && voted === player.name ? 'votedActive' : '' } >
+    <tr key={player.id} className={ voted && voted === player.id ? 'votedActive' : '' } >
       <td>
         <div className="voteInput">
           <input
-            value={player.name}
+            value={player.id}
             name="vote"
             type="radio"
             onChange={(e) => e.target.checked && setVoted(e.target.value)}
-            id={`vote-${player.name}`}
+            id={`vote-${player.id}`}
           />
         </div>
       </td>
       <td>
         <label
           className="fullWidth fullHeight voteLabel"
-          htmlFor={`vote-${player.name}`}
+          htmlFor={`vote-${player.id}`}
         >
           {player.name}
         </label>
@@ -90,7 +71,7 @@ function VoteTable(props: VoteTableProps) {
         </Table>
       </div>
       <div>
-        <p>Voting for: {voted}</p>
+        <p>Voting for: {playerLookup[voted].name}</p>
         <Button
           variant="primary"
           type="button"
@@ -106,22 +87,58 @@ function VoteTable(props: VoteTableProps) {
   );
 }
 
-function VoteResult({ playerName }: { playerName: string }) {
+function VoteResult({ player }: { player: Player }) {
   return (
     <div>
-      <>Voted {{ playerName }}</>
+      <>Voted { player.name }</>
     </div>
   );
 }
 
 export function Voting(props: VoteProps) {
-  const [votedPlayerName, setVotedPlayerName] = useState<string>("");
+  const [votedPlayerId, setVotedPlayerId] = useState<string>("");
+  const { /* players, */ gameId } = props;
 
-  if (!votedPlayerName) {
+  const players: Player[] = [
+    { id: "1", name: "Rosie Groves" },
+    { id: "2", name: "Rey Meeland" },
+    { id: "3", name: "Jacky Blamey" },
+    { id: "4", name: "Cristiano Allon" },
+    { id: "5", name: "Lowrance Putten" },
+    { id: "6", name: "Maryellen Havvock" },
+    { id: "7", name: "Kanya Baulcombe" },
+    { id: "8", name: "Leola Habens" },
+    { id: "9", name: "Illa Swaden" },
+    { id: "10", name: "Orsola Garatty" },
+    { id: "11", name: "Bentley Cuningham" },
+    { id: "12", name: "Toddie Weerdenburg" },
+    { id: "13", name: "Nickola Dewicke" },
+    { id: "14", name: "Kevin Mountstephen" },
+    { id: "15", name: "Alicea Raulin" },
+    { id: "16", name: "Shea Truitt" },
+    { id: "17", name: "Aldis Paradin" },
+    { id: "18", name: "Janis Tzarkov" },
+    { id: "19", name: "Pall Dalgety" },
+    { id: "20", name: "Manny Nathan" },
+  ];
+
+  const playerLookup = players.reduce((prev: Record<string, Player>, current: Player) => {
+    return { ...prev, [current.id]: current }
+  }, {});
+
+  console.log(votedPlayerId);
+
+  if (!votedPlayerId) {
     return (
-      <VoteTable {...props} onSubmit={(player) => setVotedPlayerName(player)} />
+      <VoteTable
+        playerLookup={playerLookup}
+        players={players}
+        gameId={gameId}
+        onSubmit={(player) => setVotedPlayerId(player)} />
     );
   } else {
-    return <VoteResult playerName={votedPlayerName}></VoteResult>;
+    const player = playerLookup[votedPlayerId];
+
+    return <VoteResult player={player}></VoteResult>;
   }
 }

@@ -2,8 +2,9 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Player } from "./Voting";
 
-function splitPlayerList(playerText: string) {
-	return playerText.split("\n").map((name) => ({ name: name.trim() }));
+function splitPlayerList(playerText: string): Player[] {
+  // FIXME: determine id some sane way
+	return playerText.split("\n").map((name, idx) => ({ id: '' + idx, name: name.trim() }));
 }
 
 function Moderation() {
