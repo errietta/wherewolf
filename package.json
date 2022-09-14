@@ -1,0 +1,22 @@
+{
+  "name": "wherewolf",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "private": true,
+  "workspaces": ["frontend"],
+  "engines": {
+    "npm": "please-use-yarn",
+    "yarn": ">= 1.22.1" 
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/errietta/wherewolf.git"
+  },
+  "author": "",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/errietta/wherewolf/issues"
+  },
+  "homepage": "https://github.com/errietta/wherewolf#readme"
+}
