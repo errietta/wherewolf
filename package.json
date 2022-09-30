@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "private": true,
-  "workspaces": ["frontend"],
+  "workspaces": ["frontend", "backend"],
   "engines": {
     "npm": "please-use-yarn",
     "yarn": ">= 1.22.1" 
