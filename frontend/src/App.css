@@ -45,6 +45,18 @@
   height: 100%;
 }
 
+.w70 {
+  width: 70%;
+}
+
+.block {
+  display: block
+}
+
+.btn10 {
+  margin-top: 10px !important
+}
+
 /* voting */
 
 .voteLabel {
@@ -83,6 +95,5 @@
 .voteHeader {
   width: 10%;
 }
-
 
 /* */

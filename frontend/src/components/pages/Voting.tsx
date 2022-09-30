@@ -1,10 +1,7 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Button, Table } from "react-bootstrap";
 
-export type Player = {
-  id: string;
-  name: string;
-};
+import { Player } from '../../types';
 
 type VoteTableProps = VoteProps & {
   playerLookup: Record<string, Player>;
